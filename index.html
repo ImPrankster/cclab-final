@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
-        <script src="https://unpkg.com/petite-vue" defer init></script>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <meta charset="utf-8" />
-    </head>
-    <body>
-        <main></main>
-        <script src="sketch.js"></script>
-    </body>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
+    <script src="https://unpkg.com/petite-vue" defer init></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="output.css" />
+    <meta charset="utf-8" />
+  </head>
+  <body class="bg-warm">
+    <div class="flex flex-col items-stretch justify-center text-center">
+      <div class="p-7 pt-20 font-fun text-3xl">Confetti!</div>
+      <div class="p-2 font-mono text-base text-gray-800">By Leo Wang</div>
+      <main class="flex items-center justify-center p-7"></main>
+      <div class="p-2 font-mono text-base text-gray-800">
+        Share with others!
+      </div>
+    </div>
+    <script src="sketch.js"></script>
+  </body>
 </html>
