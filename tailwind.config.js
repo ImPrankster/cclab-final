@@ -3,9 +3,6 @@ module.exports = {
   content: ["./**/*.{html,js}"],
   theme: {
     extend: {
-      fontFamily: {
-        fun: ["Monoton"],
-      },
       colors: {
         warm: "#FFFFFB",
       },

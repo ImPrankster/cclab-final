@@ -1,42 +1,69 @@
+let canvasState = "IDLE"; //"BUILDIN, IDLE, BUILDOUT"
+
+let choicesDisplayArr;
 let confettiArr = [];
-let pressTime = 0;
 
-function setup() {
-  createCanvas(400, 400);
-  colorMode(HSB);
-
-  for (let i = 0; i < random(50, 70); i++) {
-    confettiArr[i] = new confetti(random(width), random(height));
+class choicesDisplay {
+  constructor(emoji) {
+    this.x = Math.floor(Math.random() * 401) - 1;
+    this.y = Math.floor(Math.random() * 401) - 1;
+    this.xSpd = Math.floor(Math.random() * 2 - 1) - 1;
+    this.ySpd = Math.floor(Math.random() * 2 - 1) - 1;
+    this.emoji = emoji;
+    this.tW = 0;
+    this.isChoosed = false;
   }
-}
-
-function draw() {
-  background(255);
-  for (let i = 0; i < confettiArr.length; i++) {
-    confettiArr[i].display();
-    confettiArr[i].move();
-    if (confettiArr[i].y > height) {
-      confettiArr[i] = new confetti(random(width), 0);
+  move() {
+    this.x += this.xSpd;
+    this.y += this.ySpd;
+  }
+  bounce() {
+    if (this.x < 0) {
+      this.x = 0;
+      this.xSpd = this.xSpd * -1;
+    } else if (this.x > width) {
+      this.x = width;
+      this.xSpd = this.xSpd * -1;
+    }
+    if (this.y < 0) {
+      this.y = 0;
+      this.ySpd = this.ySpd * -1;
+    } else if (this.y > height) {
+      this.y = height;
+      this.ySpd = this.ySpd * -1;
     }
   }
-}
-
-function mousePressed() {
-  //press mouse button to increase the density.
-  for (let i = 0; i < random(50, 70); i++) {
-    confettiArr.push(new confetti(random(width), random(height)));
+  display() {
+    push();
+    textSize(128);
+    text(this.emoji, this.x - 64, this.y + 64);
+    this.move();
+    this.bounce();
+    pop();
   }
-  //press 5 times resets the array
-  if (pressTime >= 5) {
-    let tempArr = [];
-    for (let i = 0; i < random(50, 70); i++) {
-      tempArr[i] = new confetti(random(width), random(height));
+  buildIn() {
+    push();
+    textSize(128);
+    fill(0, 0, 0, this.tW);
+    text(this.emoji, this.x - 64, this.y + 64);
+    this.tW += 0.05;
+    pop();
+  }
+  buildOut() {
+    if (!this.isChoosed) {
+      return;
+    } else {
+      for (let i = 0; i < confettiArr.length; i++) {
+        confettiArr[i].display();
+        confettiArr[i].move();
+        if (confettiArr[i].y > height) {
+          confettiArr[i] = new confetti(random(width), 0);
+        }
+      }
+      textSize(128);
+      text(this.emoji, 200 - 64, 200 + 64);
     }
-    confettiArr = tempArr;
-    pressTime = 0;
-    return;
   }
-  pressTime++;
 }
 
 class confetti {
@@ -67,5 +94,46 @@ class confetti {
   }
   move() {
     this.y += this.amp / 2;
+  }
+}
+
+function loadChoices(arr) {
+  choicesDisplayArr = arr.map((element) => {
+    return new choicesDisplay(element);
+  });
+}
+
+//!Setup function
+function setup() {
+  createCanvas(400, 400);
+  colorMode(HSB);
+  for (let i = 0; i < random(50, 70); i++) {
+    confettiArr[i] = new confetti(random(width), random(height));
+  }
+}
+
+//!Draw function
+function draw() {
+  background(255);
+
+  if (canvasState == "BUILDIN") {
+    choicesDisplayArr.map((element) => {
+      element.buildIn();
+    });
+    console.log("BUILDIN");
+  }
+
+  if (canvasState == "IDLE") {
+    choicesDisplayArr.map((element) => {
+      element.display();
+    });
+    console.log("IDLE");
+  }
+
+  if (canvasState == "BUILDOUT") {
+    choicesDisplayArr.map((element) => {
+      element.buildOut();
+    });
+    console.log("BUILDOUT");
   }
 }
