@@ -1,10 +1,12 @@
 let qObject = {};
+let qNum = 0;
+let dayNum = 1;
 
 let playerStat = {
-  money: 2000,
-  health: 50,
-  relationship: 50,
-  learning: 50,
+  money: 300,
+  health: 15,
+  relationship: 15,
+  learning: 15,
 };
 
 let playerPerk = {};
@@ -54,17 +56,46 @@ function qShow() {
 }
 
 function qAnswered(obj) {
-  canvasState = "BUILDOUT";
-  qObject = sampleString(questionArray);
+  qNum++;
+  dayNum = Math.floor((qNum - 1) / 3) + 1;
   countPlayerStat(obj);
   if ("exec" in obj) {
     obj.exec();
   }
-  setTimeout(() => {
-    canvasState = "IDLE";
-    choicesDisplayArr = [];
-    qShow();
-  }, 1000);
+  qObject = sampleString(questionArray);
+  if (
+    qNum == 4 ||
+    qNum == 7 ||
+    qNum == 10 ||
+    qNum == 13 ||
+    qNum == 16 ||
+    qNum == 19
+  ) {
+    canvasState = "BUILDOUT";
+    setTimeout(() => {
+      canvasState = "DAYEND";
+    }, 2000);
+    setTimeout(() => {
+      canvasState = "IDLE";
+      choicesDisplayArr = [];
+      qShow();
+    }, 4000);
+  } else if (
+    qNum == 21 ||
+    playerStat.money <= 0 ||
+    playerStat.health <= 0 ||
+    playerStat.relationship <= 0 ||
+    playerStat.learning <= 0
+  ) {
+    canvasState = "END";
+  } else {
+    canvasState = "BUILDOUT";
+    setTimeout(() => {
+      canvasState = "IDLE";
+      choicesDisplayArr = [];
+      qShow();
+    }, 2000);
+  }
 }
 
 qObject = qPerk;

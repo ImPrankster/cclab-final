@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>"A month in college" - CCL Final</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="output.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Maze&family=Unbounded:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-warm">
+    <div v-scope class="absolute right-7 top-5">
+      <div class="text-right font-main text-3xl">
+        Day {{viewStore.dayNumView}}
+      </div>
+      <div class="w-40 text-right font-main text-base">
+        {{viewStore.playerStatView}}
+      </div>
+    </div>
+    <div class="flex flex-col justify-center text-center">
+      <a href="./index.html" class="mt-6 font-title text-8xl">College</a>
+      <div class="m-2 font-main text-base text-gray-800">By Leo Wang</div>
+      <div v-scope class="flex flex-row items-center justify-center space-x-6">
+        <main class="flex items-center justify-center"></main>
+      </div>
+      <!--The Choices Area-->
+      <div
+        v-scope
+        class="m-6 flex flex-col items-center justify-center"
+        v-if="viewStore.isCanvasIdle"
+      >
+        <div class="w-96 rounded-md bg-slate-800 font-main text-sm text-warm">
+          {{viewStore.playerPerkView.description}}
+        </div>
+        <div class="mt-4 w-1/2 text-justify font-main text-base">
+          {{viewStore.qObjectView.description}}
+        </div>
+        <div class="mt-2 font-main text-lg">
+          {{viewStore.qObjectView.question}}
+        </div>
+        <div class="mt-4 flex flex-row items-center justify-center space-x-6">
+          <div
+            class="rounded-md bg-slate-800 p-2 font-main text-base text-warm"
+            v-for="(button, index) in viewStore.qObjectView.choices"
+          >
+            <button
+              @click="exec(button, index)"
+              class="flex w-52 flex-col items-center justify-center"
+            >
+              {{button.name}}
+              <div class="text-sm">{{choiceNumToString(button.num)}}</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--Game over-->
+
+      <div
+        v-scope
+        class="m-6 flex flex-col items-center justify-center"
+        v-if="viewStore.isCanvasEnd"
+      >
+        <div class="mt-4 font-main text-2xl">The game is over!</div>
+        <div class="mt-2 font-main text-lg">
+          Hope you enjoyed it, and good luck on your college life!
+        </div>
+      </div>
+    </div>
+    <script src="./data/question-array.js"></script>
+    <script src="./data/player-perk.js"></script>
+    <script src="view-controller.js" type="module"></script>
+    <script src="sketch.js"></script>
+    <script src="game-core.js"></script>
+  </body>
+</html>

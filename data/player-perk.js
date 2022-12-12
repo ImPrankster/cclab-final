@@ -6,28 +6,40 @@ const qPerk = {
     {
       name: "Social Butterfly",
       exec: () => {
-        playerPerk = { relationship: 2 };
+        playerPerk = {
+          relationship: 2,
+          description: "🦋 Social Butterfly Perk: 2 times relationship gain.",
+        };
       },
       emoji: "🦋",
     },
     {
       name: "Book Worm",
       exec: () => {
-        playerPerk = { learning: 2 };
+        playerPerk = {
+          learning: 2,
+          description: "📚 Book Worm Perk: 2 times learning gain.",
+        };
       },
       emoji: "📚",
     },
     {
       name: "Gym Lover",
       exec: () => {
-        playerPerk = { health: 2 };
+        playerPerk = {
+          health: 2,
+          description: "🏋️ Gym Lover Perk: 2 times health gain.",
+        };
       },
       emoji: "🏋️",
     },
     {
       name: "Side Hustler",
       exec: () => {
-        playerStat.money += 500;
+        playerStat.money += 50;
+        playerPerk = {
+          description: "👔 Side Hustler Perk: Start with 50 more money.",
+        };
       },
       emoji: "👔",
     },

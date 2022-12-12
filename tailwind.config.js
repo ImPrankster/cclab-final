@@ -6,6 +6,10 @@ module.exports = {
       colors: {
         warm: "#FFFFFB",
       },
+      fontFamily: {
+        title: ["Rubik Maze", "cursive"],
+        main: ["Unbounded", "cursive"],
+      },
     },
   },
   plugins: [],

@@ -3,40 +3,51 @@
   <head>
     <meta charset="utf-8" />
     <title>"A month in college" - CCL Final</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
     <link rel="stylesheet" type="text/css" href="output.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Maze&family=Unbounded:wght@500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="bg-warm">
-    <div class="flex flex-col justify-center text-center">
-      <div class="m-6 font-mono text-3xl">College</div>
-      <div class="m-2 font-mono text-base text-gray-800">By Leo Wang</div>
-      <div v-scope class="flex flex-row items-center justify-center space-x-6">
-        <div class="w-40 text-right font-mono text-base">
-          {{viewStore.playerStatView}}
-        </div>
-        <main class="flex items-center justify-center"></main>
-        <div class="w-52 text-left font-mono text-base">
-          {{viewStore.qObjectView.description}}
-        </div>
+    <div
+      class="flex flex-col items-center justify-center text-center font-main"
+    >
+      <div class="mt-6 font-title text-8xl">College</div>
+      <div class="m-2 text-base text-gray-800">By Leo Wang</div>
+      <div class="w-6/12 text-justify">
+        As a college student, we are constantly bombarded with choices. Do you
+        go to class or stay in bed? Do you buy a burger for lunch or a salad
+        instead? Do you go out with your friends or stay at home and do your
+        homework? These questions are quite common, at least for me.
       </div>
-      <!--The Choices Area-->
-      <div v-scope class="m-6 flex flex-col">
-        <div class="font-mono text-lg">{{viewStore.qObjectView.question}}</div>
-        <div class="flex flex-row items-center justify-center space-x-6">
-          <div
-            class="mt-4 rounded-md bg-stone-700 p-2 font-mono text-base text-warm"
-            v-for="(button, index) in viewStore.qObjectView.choices"
-          >
-            <button @click="exec(button, index)">{{button.name}}</button>
-          </div>
-        </div>
+      <div class="w-6/12 text-justify">
+        This game aims to simulate that feeling - in a more interesting way.
+      </div>
+      <div class="w-6/12 text-justify">
+        Inspired by
+        <a
+          href="https://playspent.org/"
+          class="m-1 rounded-sm ring-2 ring-slate-800"
+          >SPENT</a
+        >, definately check that out.
+      </div>
+      <div class="mt-4 flex flex-row items-center justify-center space-x-6">
+        <a
+          href="./tutorial.html"
+          class="rounded-md bg-slate-800 p-2 font-main text-base text-warm"
+        >
+          View tutorial
+        </a>
+        <a
+          href="./game.html"
+          class="rounded-md bg-slate-800 p-2 font-main text-base text-warm"
+        >
+          Play the game
+        </a>
       </div>
     </div>
-    <script src="./data/question-array.js"></script>
-    <script src="./data/player-perk.js"></script>
-    <script src="view-controller.js" type="module"></script>
-    <script src="sketch.js"></script>
-    <script src="game-core.js"></script>
   </body>
 </html>
